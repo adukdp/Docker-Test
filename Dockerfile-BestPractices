@@ -1,0 +1,26 @@
+FROM nginx:alpine
+#RUN echo "1" >> /usr/share/nginx/html/test.html
+#RUN echo "2" >> /usr/share/nginx/html/test.html
+#RUN echo "3" >> /usr/share/nginx/html/test.html
+
+#here are 4 layers we can write in 2 layers using \ - same line and && and
+
+#RUN \
+#    echo "1" >> /usr/share/nginx/html/test.html && \
+#    echo "2" >> /usr/share/nginx/html/test.html && \
+#    echo "3" >> /usr/share/nginx/html/test.html
+
+#We can again optimized it better
+
+ENV webfile /usr/share/nginx/html/test.html
+
+RUN \
+    echo "6" >> $webfile && \
+    echo "5" >> $webfile && \
+    echo "4" >> $webfile
+==============================================================================
+
+docker build -t test1 -f Dockerfile-BestPractice .
+docker run -d -p 8181:80 test1
+http://13.233.115.232:8181/test.html
+654
